@@ -5,6 +5,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { fetchNotes } from "../../services/noteService";
 import NoteList from "../NoteList/NoteList";
 import SearchBox from "../SearchBox/SearchBox";
+import Pagination from "../Pagination/Pagination";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,11 +21,19 @@ export default function App() {
     placeholderData: keepPreviousData,
   });
 
+  const totalPages = data?.totalPages ?? 0;
+
   return (
     <div className={styles.app}>
       <header className={styles.toolbar}>
         <SearchBox value={searchQuery} onSearch={updateSearchQuery} />
-        {/* Пагінація */}
+        {totalPages > 0 && (
+          <Pagination
+            total={totalPages}
+            page={currentPage}
+            onChange={setCurrentPage}
+          />
+        )}
         <button className={styles.button}>Create note +</button>
       </header>
       {isLoading && <p className={styles.loading}>Loading notes...</p>}
