@@ -17,6 +17,7 @@ export default function SearchBox({ value, onSearch }: SearchBoxProps) {
       type="text"
       defaultValue={value}
       onChange={handleChange}
+      placeholder="Search notes"
     />
   );
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Note } from "../types/note";
+import type { Note, NewNote } from "../types/note";
 
 export interface FetchNotesResponse {
   notes: Note[];
@@ -27,4 +27,25 @@ export const fetchNotes = async (page: number, query: string) => {
   );
 
   return response.data;
+};
+
+export const addNote = async (noteData: NewNote) => {
+  const res = await axios.post(
+    "https://notehub-public.goit.study/api/notes",
+    noteData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res.data;
+};
+
+export const deleteNote = async (noteId: string) => {
+  await axios.delete(`https://notehub-public.goit.study/api/notes/${noteId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
