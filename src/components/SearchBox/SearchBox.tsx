@@ -13,6 +13,8 @@ export default function SearchBox({ value, onSearch }: SearchBoxProps) {
 
   return (
     <input
+      id="search"
+      name="search"
       className={styles.input}
       type="text"
       defaultValue={value}

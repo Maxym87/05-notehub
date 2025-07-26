@@ -74,14 +74,14 @@ export default function NoteForm({ onCloseModal }: NoteFormProps) {
           <label htmlFor={`${idUse}-content`}>Content</label>
           <Field
             as="textarea"
-            id={`${idUse}content`}
+            id={`${idUse}-content`}
             name="content"
             rows={8}
             className={styles.textarea}
           />
           {
             <ErrorMessage
-              name="title"
+              name="content"
               component="span"
               className={styles.error}
             />
@@ -104,7 +104,7 @@ export default function NoteForm({ onCloseModal }: NoteFormProps) {
           </Field>
           {
             <ErrorMessage
-              name="title"
+              name="tag"
               component="span"
               className={styles.error}
             />

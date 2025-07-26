@@ -16,7 +16,7 @@ export default function App() {
   const updateSearchQuery = useDebouncedCallback((newSearchQuery: string) => {
     setSearchQuery(newSearchQuery);
     setCurrentPage(1);
-  }, 500);
+  }, 300);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["notes", currentPage, searchQuery],
