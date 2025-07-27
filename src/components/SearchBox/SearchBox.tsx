@@ -17,7 +17,7 @@ export default function SearchBox({ value, onSearch }: SearchBoxProps) {
       name="search"
       className={styles.input}
       type="text"
-      defaultValue={value}
+      value={value}
       onChange={handleChange}
       placeholder="Search notes"
     />

@@ -8,9 +8,12 @@ export interface FetchNotesResponse {
 
 const token = import.meta.env.VITE_API_KEY;
 
-export const fetchNotes = async (page: number, query: string) => {
+export const fetchNotes = async (
+  page: number,
+  query: string
+): Promise<FetchNotesResponse> => {
   const params: Record<string, string | number> = {
-    perPage: 10,
+    perPage: 12,
     page,
   };
 
@@ -19,7 +22,7 @@ export const fetchNotes = async (page: number, query: string) => {
   }
 
   const response = await axios.get<FetchNotesResponse>(
-    `https://notehub-public.goit.study/api/notes`,
+    "https://notehub-public.goit.study/api/notes",
     {
       headers: { Authorization: `Bearer ${token}` },
       params,
@@ -29,8 +32,8 @@ export const fetchNotes = async (page: number, query: string) => {
   return response.data;
 };
 
-export const addNote = async (noteData: NewNote) => {
-  const res = await axios.post(
+export const addNote = async (noteData: NewNote): Promise<Note> => {
+  const res = await axios.post<Note>(
     "https://notehub-public.goit.study/api/notes",
     noteData,
     {
@@ -42,10 +45,14 @@ export const addNote = async (noteData: NewNote) => {
   return res.data;
 };
 
-export const deleteNote = async (noteId: string) => {
-  await axios.delete(`https://notehub-public.goit.study/api/notes/${noteId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const deleteNote = async (noteId: number): Promise<Note> => {
+  const res = await axios.delete<Note>(
+    `https://notehub-public.goit.study/api/notes/${noteId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return res.data;
 };
