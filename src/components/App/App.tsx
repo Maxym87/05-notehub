@@ -13,10 +13,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [isModal, setIsModal] = useState(false);
-  const updateSearchQuery = useDebouncedCallback((newSearchQuery: string) => {
-    setSearchQuery(newSearchQuery);
-    setCurrentPage(1);
-  }, 300);
+  const updateSearchQuery = useDebouncedCallback(setSearchQuery, 300);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["notes", currentPage, searchQuery],
@@ -33,7 +30,7 @@ export default function App() {
     <div className={styles.app}>
       <header className={styles.toolbar}>
         <SearchBox value={searchQuery} onSearch={updateSearchQuery} />
-        {totalPages > 0 && (
+        {totalPages > 1 && (
           <Pagination
             total={totalPages}
             page={currentPage}
